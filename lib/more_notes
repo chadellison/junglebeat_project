@@ -1,0 +1,115 @@
+require 'minitest/autorun'
+require '../lib/jungle_beat'
+require 'pry'
+
+class JungleBeatTest < Minitest::Test
+
+
+  def test_appending_long_string_onto_list
+    jb = JungleBeat.new("beep bop boop")
+    assert_equal "boop", jb.find_tail
+  end
+
+  def test_returns_all
+    jb = JungleBeat.new("beep bop boop")
+    assert_equal "beep bop boop", jb.all
+  end
+
+end
+
+require_relative 'linklist'
+require_relative 'node'
+require 'pry'
+
+class JungleBeat
+  attr_accessor :separate_beats
+  attr_accessor :head
+
+  def initialize(beats)
+    @head = Node.new
+    @count = 0
+    @separate_beats = beats.split
+    @separate_beats.each { |beat| self.append(beat) }
+  end
+
+  def find_tail
+    return @head if head.nil?
+    temporary_head = @head
+    while temporary_head.next_node != nil
+      temporary_head = temporary_head.next_node
+    end
+    temporary_head
+  end
+
+  def append(data)
+    new_node = Node.new(data)
+    find_tail.next_node = new_node
+  end
+
+  def prepend(data)
+    temp_head = @head
+    @head = Node.new(data, temp_head)
+  end
+
+  def count
+    temp_head = @head
+    while temp_head.next_node != nil
+      @count += 1
+    end
+  end
+
+  def all
+    temporary_head = @head
+    word = nil
+    list = []
+    list << temporary_head.data
+    while temporary_head.next_node != nil
+      temporary_head = temporary_head.next_node
+      list << temporary_head.data
+    end
+    list.each do |data|
+      word = data
+    end
+    word
+  end
+
+  def include?(word)
+    temporary_head = @head
+    list = []
+    list << temporary_head.data
+    while temporary_head.next_node !=nil
+      temporary_head = temporary_head.next_node
+      list << temporary_head.data
+    end
+    list.include?(word)
+  end
+
+  def pop(number)
+    temp_head = @head
+    while temp_head != nil
+      if temp_head.next_node == nil
+        last_word = temp_head.pop
+      end
+
+    end
+    last_word
+    #remove one from counter
+  end
+
+  def find(position, number)
+  end
+
+  def insert(position, data)
+  end
+end
+
+# class JungleBeat
+#   @count = 0
+#   list = data.split
+#   first_word = list.shift
+#   # while first_word != nil
+#   #JungleBeat class
+#   @head = Node.new(first_word, next_node)
+#   @count += 1
+# end
+jb = JungleBeat.new("hey ho hi")

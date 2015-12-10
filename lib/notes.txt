@@ -1,0 +1,18 @@
+initialize one node from ll
+
+first test initialize a list of 4 nodes #make list
+
+def tail
+  ask a node if it points to nil
+  if yes --> return node
+  otherwise --> node.link
+  (some sort of loop)
+  current_node will equal tail
+end
+
+def append method
+end
+
+def print list / all
+  helpful for testing
+end
